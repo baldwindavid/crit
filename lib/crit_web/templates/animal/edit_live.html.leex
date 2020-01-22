@@ -1,0 +1,61 @@
+<h1>Editing <%= @animal.name %></h1>
+
+<div id="animal-form">
+  <%= form_for @animal_changeset, "#", [phx_submit: "save_animal", phx_change: "validate_animal"], fn f -> %>
+    <%= text_input f, :name %>
+    <%= error_tag f, :name %>
+    <%= submit("Submit") %>
+  <% end %>
+</div>
+
+<hr>
+
+<h2>Create a Service Gap</h2>
+<div id="new-service-gap-form">
+  <%= form_for @new_service_gap_changeset, "#", [phx_submit: "create_service_gap", phx_change: "validate_new_service_gap"], fn f -> %>
+    <%= label f, :starts_at %>
+    <%= datetime_select f, :starts_at %>
+    <%= error_tag f, :starts_at %>
+
+    <%= label f, :ends_at %>
+    <%= datetime_select f, :ends_at %>
+    <%= error_tag f, :ends_at %>
+
+    <%= label f, :reason %>
+    <%= text_input f, :reason %>
+    <%= error_tag f, :reason %>
+
+    <%= submit("Add") %>
+  <% end %>
+</div>
+
+<hr>
+
+<h2>Existing Service Gaps</h2>
+<p>Number of Service Gaps: <%= Enum.count(@service_gap_changesets) %></p>
+
+<%= for service_gap_changeset <- @service_gap_changesets do %>
+
+  <div id="service-gap-#{service_gap_changeset.data.id}-form">
+    <%= form_for service_gap_changeset, "#", [phx_submit: "update_service_gap", phx_change: "validate_existing_service_gap"], fn f -> %>
+      <%= hidden_input f, :id %>
+
+      <%= label f, :starts_at %>
+      <%= datetime_select f, :starts_at %>
+      <%= error_tag f, :starts_at %>
+
+      <%= label f, :ends_at %>
+      <%= datetime_select f, :ends_at %>
+      <%= error_tag f, :ends_at %>
+
+      <%= label f, :reason %>
+      <%= text_input f, :reason %>
+      <%= error_tag f, :reason %>
+
+      <%= submit("Update") %>
+    <% end %>
+  </div>
+
+  <%= link "Remove", to: "#", "phx-click": "delete_service_gap", "phx-value-id": service_gap_changeset.data.id %>
+  <hr>
+<% end %>

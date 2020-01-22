@@ -15,7 +15,8 @@ config :crit, CritWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "uWJKmJaFbs+8kSaF+jBJ3MGrrqQipLWSwBE7D8wWmSmY5lo/TgD4SOSfla7ho5Zu",
   render_errors: [view: CritWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Crit.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Crit.PubSub, adapter: Phoenix.PubSub.PG2],
+  live_view: [signing_salt: "ScVuOdFYpAdLTz6yRTxACilhpuJJrJrt"]
 
 # Configures Elixir's Logger
 config :logger, :console,

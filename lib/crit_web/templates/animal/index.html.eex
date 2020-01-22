@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= for animal <- @animals do %>
+    <tr>
+      <td><%= animal.name %></td>
+      <td>
+        <%= link "Edit", to: Routes.animal_path(@conn, :edit, animal) %>
+        |
+        <%= link "Delete", to: Routes.animal_path(@conn, :delete, animal), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<%= link "New Animal", to: Routes.animal_path(@conn, :new), class: "button" %>
